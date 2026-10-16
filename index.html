@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta
+      name="description"
+      content="My AI Engineering journey, projects, and technical skills."
+    />
+
+    <title>My Portfolio | AI Engineer</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+    <!-- Modern typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+/>
+
+
+    <!-- Lucide icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+  </head>
+
+  <body>
+    <!-- Navigation -->
+    <header class="navbar">
+      <a href="#home" class="logo">H<span>.</span></a>
+
+      <nav>
+  <a href="#home">Home</a>
+  <a href="#about-details">About</a>
+  <a href="#projects">Work</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+      <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Switch color theme">☀️</button>
+
+        <a href="#contact" class="talk-button">Let's talk ↗</a>
+      </div>
+    </header>
+
+    <!-- Main Dashboard -->
+    <main class="dashboard">
+      <!-- Profile / Hero -->
+      <section class="card profile-card" id="home">
+        <div class="profile-top">
+          <div class="avatar">
+            <i data-lucide="brain-circuit"></i>
+          </div>
+          <div>
+            <p class="profile-name">Muhammad Hussnain</p>
+            <p class="profile-role">AI Engineer in Progress</p>
+          </div>
+        </div>
+
+        <p class="eyebrow">MY JOURNEY IN TECHNOLOGY</p>
+        <h1>Building Intelligent <span>AI Applications.</span></h1>
+        <p class="profile-description">
+          I'm a Computer Science student focused on AI Engineering. I'm building
+          a strong foundation in Python, data analytics, and machine learning
+          while developing practical projects that turn data and AI concepts
+          into useful applications.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#contact" class="talk-button">
+            <i data-lucide="mail"></i> Get in touch
+          </a>
+          <a href="#projects" class="outline-button">
+            View projects <i data-lucide="arrow-up-right"></i>
+          </a>
+        </div>
+      </section>
+
+      <!-- Social Links -->
+      <section class="social-grid" aria-label="Social links">
+        <a
+          class="card social-card"
+          href="https://github.com/HNCodes-journey"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i class="fa-brands fa-github social-brand-icon"
+   aria-hidden="true"></i>
+          <span>GitHub</span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+        <a
+          class="card social-card"
+          href="https://www.linkedin.com/in/muhammad-hussnain326?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i class="fa-brands fa-linkedin social-brand-icon"
+   aria-hidden="true"></i>
+          <span>LinkedIn</span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+        <a class="card social-card" href="mailto:muhammadhussnain322@gmail.com">
+          <i data-lucide="mail"></i>
+          <span>Email</span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+        <a class="card social-card" href="#projects">
+          <i data-lucide="folder-code"></i>
+          <span>My Work</span>
+          <i data-lucide="arrow-up-right"></i>
+        </a>
+      </section>
+
+      <!-- Statement -->
+      <section class="card headline-card">
+        <p class="eyebrow">MY FOCUS</p>
+        <h2>Learning today.<br />Building for tomorrow.</h2>
+        <p>Turning machine learning concepts into useful AI applications.</p>
+      </section>
+      
+      <!-- Skills -->
+      <section class="card skills-card" id="skills">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">MY TOOLKIT</p>
+            <h2>Skills & Technologies</h2>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>Data Analysis</h3>
+          <div class="skill-tags">
+            <span>Python</span>
+            <span>NumPy</span>
+            <span>Pandas</span>
+            <span>Matplotlib</span>
+            <span>Seaborn</span>
+            <span>Statistics</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>Machine Learning</h3>
+          <div class="skill-tags">
+            <span>ML Fundamentals</span>
+            <span>Scikit-learn</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <h3>Web & AI Application Development</h3>
+          <div class="skill-tags">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JavaScript</span>
+            <span>FastAPI</span>
+            <span>Gemini API</span>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Projects -->
+      <section class="card projects-card" id="projects">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">WHAT I'M BUILDING</p>
+            <h2>Featured Projects</h2>
+          </div>
+          <span class="coming-soon">Growing portfolio ↗</span>
+        </div>
+
+        <div class="project-preview">
+          <article class="project-placeholder">
+            <div class="project-image">
+  <img
+    src="assets/images/projects/E-Commerce Sales Analytics Notebook.png"
+    alt="Notebook-style preview of the E-Commerce Sales Analytics project"
+    loading="lazy"
+  />
+</div>
+            <div class="project-icon">
+              <i data-lucide="chart-no-axes-combined"></i>
+            </div>
+
+            <span>01 / DATA ANALYTICS</span>
+            <h3>E-Commerce Sales Analytics</h3>
+
+            <p>Analyzed the Sample Superstore dataset using Python, Pandas, and NumPy to explore sales performance, profitability, customer segments, regional patterns, and monthly trends. Created visualizations with Matplotlib to communicate business insights.</p>
+
+            <div class="project-tags">
+              <span>Python</span>
+              <span>Pandas</span>
+              <span>NumPy</span>
+              <span>Matplotlib</span>
+              <span>Jupyter Notebook</span>
+            </div>
+
+            <div class="project-status">
+              <span class="status-dot"></span>
+              Completed
+            </div>
+            <a
+              class="project-link"
+              href="https://github.com/HNCodes-journey/E-Commerce-Sales-Analytics"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View Source Code
+              <i data-lucide="arrow-up-right"></i>
+            </a>
+          </article>
+
+          <article class="project-placeholder">
+            <div class="project-image">
+  <img
+    src="assets/images/projects/sales_dashboard.png"
+    alt="Sales charts created with Matplotlib"
+    loading="lazy"
+  />
+</div>
+            <div class="project-icon">
+              <i data-lucide="chart-no-axes-combined"></i>
+            </div>
+            <span>02 / DATA VISUALIZATION</span>
+            <h3>Matplotlib Sales Dashboard</h3>
+
+            <p>
+              Built a sales visualization dashboard using Python and Matplotlib to present sales data through clear, informative charts. Focused on making trends and comparisons easier to understand through effective data visualization.
+            </p>
+
+            <div class="project-tags">
+              <span>Python</span>
+              <span>Matplotlib</span>
+              <span>Data Visualization</span>
+            </div>
+
+            <div class="project-status">
+              <span class="status-dot"></span>
+              Completed
+            </div>
+
+            <a
+              class="project-link"
+              href="https://github.com/HNCodes-journey/Matplotlib-Sales-Dashboard"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View Source Code
+              <i data-lucide="arrow-up-right"></i>
+            </a>
+          </article>
+        </div>
+      </section>
+
+      <!-- Chatbot introduction -->
+      <section class="card assistant-card">
+        <div class="assistant-icon"><i data-lucide="message-circle"></i></div>
+        <p class="eyebrow">INTERACTIVE PORTFOLIO</p>
+        <h2>Curious about my journey?</h2>
+        <p>
+          Ask my portfolio assistant about my learning, skills, and projects.
+        </p>
+        <button class="chat-button" id="open-chat">
+          Ask My AI Assistant <i data-lucide="arrow-up-right"></i>
+        </button>
+      </section>
+      <section class="card contact-card" id="contact">
+        <p class="eyebrow">LET'S CONNECT</p>
+        <h2>Have a project or opportunity in mind?</h2>
+        <p>
+          I'm interested in learning, collaborating, and exploring opportunities
+          related to AI, machine learning, and software.
+        </p>
+
+        <a class="talk-button" href="mailto:muhammadhussnain322@gmail.com">
+          <i data-lucide="mail"></i>
+          Contact Me
+        </a>
+      </section>
+    </main>
+
+    <!-- About Details -->
+    <section class="card details-card" id="about-details">
+      <p class="eyebrow">A LITTLE ABOUT ME</p>
+      <h2>Learning. Building. Improving.</h2>
+      <p>
+        I'm developing my skills in machine learning and AI application
+        development, with a focus on building practical projects and learning
+        deployment.
+      </p>
+      <p id="backend-status">Connecting to portfolio API...</p>
+    </section>
+
+    <!-- Contact -->
+    <footer>
+      <a href="#home" class="logo">H<span>.</span></a>
+      <p>Building my future in AI, one project at a time.</p>
+      <p>© <span id="current-year"></span> My Portfolio</p>
+    </footer>
+    <div class="chat-window" id="chat-window" hidden>
+      <div class="chat-header">
+        <div>
+          <h3>Portfolio AI</h3>
+          <p>Ask me about my journey</p>
+        </div>
+        <button id="close-chat" aria-label="Close chat">×</button>
+      </div>
+
+      <div class="chat-messages" id="chat-messages">
+        <div class="message bot-message">
+          Hi! 👋 Ask me about my skills, projects, or AI Engineer journey.
+        </div>
+      </div>
+
+      <form class="chat-form" id="chat-form">
+        <input
+          type="text"
+          id="chat-input"
+          placeholder="Ask a question..."
+          aria-label="Your message"
+          required
+        />
+        <button type="submit" aria-label="Send message">➤</button>
+      </form>
+    </div>
+    <button
+      id="chat-launcher"
+      class="chat-launcher"
+      aria-label="Open AI assistant"
+    >
+      <i data-lucide="message-circle"></i>
+    </button>
+  </body>
+</html>
