@@ -41,6 +41,8 @@ MAX_HISTORY_TEXT_CHARS = 1500
 RATE_LIMIT_REQUESTS = int(os.getenv("RATE_LIMIT_REQUESTS", "10"))  # per IP...
 RATE_LIMIT_WINDOW_SECONDS = int(os.getenv("RATE_LIMIT_WINDOW", "60"))  # ...per window
 DAILY_LIMIT_PER_IP = int(os.getenv("DAILY_LIMIT_PER_IP", "60"))
+GLOBAL_DAILY_LIMIT = int(os.getenv("GLOBAL_DAILY_LIMIT", "500"))
+_global = [0, 0]  # [day_number, count]
 
 if not GEMINI_API_KEY:
     raise RuntimeError("GEMINI_API_KEY is not set. Add it to .env or your host's env vars.")
@@ -119,6 +121,7 @@ def client_ip(request: Request) -> str:
 
 def check_rate_limit(ip: str) -> None:
     now = time.time()
+    
 
     window = _recent[ip]
     while window and now - window[0] > RATE_LIMIT_WINDOW_SECONDS:
@@ -134,7 +137,12 @@ def check_rate_limit(ip: str) -> None:
     if entry[1] >= DAILY_LIMIT_PER_IP:
         raise HTTPException(429, "Daily message limit reached. Please try again tomorrow.")
     entry[1] += 1
-
+        # Global backstop (IP spoof hone par bhi quota bachata hai)
+    if _global[0] != today:
+        _global[0], _global[1] = today, 0
+    if _global[1] >= GLOBAL_DAILY_LIMIT:
+        raise HTTPException(429, "The assistant is busy today. Please try again tomorrow.")
+    _global[1] += 1
     # Keep memory bounded
     if len(_recent) > 5000:
         _recent.clear()
