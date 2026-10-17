@@ -10,7 +10,6 @@ const API_BASE =
     location.hostname === "localhost" || location.hostname === "127.0.0.1"
         ? "http://127.0.0.1:8000"
         : "";
-
 const CHAT_TIMEOUT_MS = 60000; // free hosts can take ~60s to wake up
 
 /* =========================================
