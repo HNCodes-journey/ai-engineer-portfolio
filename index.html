@@ -4,15 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <title>Muhammad Hussnain | AI Engineer Portfolio</title>
     <meta
       name="description"
-      content="My AI Engineering journey, projects, and technical skills."
+      content="Muhammad Hussnain's AI Engineering journey, projects, and technical skills."
     />
 
-    <title>My Portfolio | AI Engineer</title>
+    <!-- Link preview (LinkedIn, WhatsApp, etc.). Add an og:image once you host a preview image. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Muhammad Hussnain | AI Engineer Portfolio" />
+    <meta
+      property="og:description"
+      content="Computer Science student building practical AI and data projects with Python, machine learning, and FastAPI."
+    />
+    <!-- <meta property="og:image" content="https://YOUR-SITE/assets/images/og-preview.png" /> -->
+
+    <!-- Emoji favicon (no extra file needed) -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>"
+    />
 
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
+
     <!-- Modern typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,29 +35,37 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-/>
 
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
 
-    <!-- Lucide icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    
+    <!-- Lucide icons (pinned version so a new release can't break your icons) -->
+    <script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
   </head>
 
   <body>
+    <!-- Apply the saved theme immediately so light-mode visitors don't see a dark flash -->
+    <script>
+      try {
+        if (localStorage.getItem("portfolio-theme") === "light") {
+          document.body.classList.add("light-theme");
+        }
+      } catch (e) {}
+    </script>
+
     <!-- Navigation -->
     <header class="navbar">
       <a href="#home" class="logo">H<span>.</span></a>
 
-      <nav>
-  <a href="#home">Home</a>
-  <a href="#about-details">About</a>
-  <a href="#projects">Work</a>
-  <a href="#contact">Contact</a>
-</nav>
+      <nav aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a href="#about-details">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Work</a>
+        <a href="#contact">Contact</a>
+      </nav>
 
       <div class="nav-actions">
         <button id="theme-toggle" aria-label="Switch color theme">☀️</button>
@@ -81,43 +104,120 @@
           <a href="#projects" class="outline-button">
             View projects <i data-lucide="arrow-up-right"></i>
           </a>
+                    <a
+            href="assets/Muhammad-Hussnain-CV.pdf"
+            class="outline-button"
+            download="Muhammad-Hussnain-CV.pdf"
+          >
+            <i data-lucide="download"></i> Download CV
+          </a>
         </div>
       </section>
 
-      <!-- Social Links -->
-      <section class="social-grid" aria-label="Social links">
-        <a
-          class="card social-card"
-          href="https://github.com/HNCodes-journey"
-          target="_blank"
-          rel="noopener noreferrer"
+      <!-- Social Links + Robot -->
+      <section class="social-robot-layout" aria-label="Social links and AI assistant">
+        <div class="social-grid" aria-label="Social links">
+          <a
+            class="card social-card"
+            href="https://github.com/HNCodes-journey"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fa-brands fa-github social-brand-icon" aria-hidden="true"></i>
+            <span>GitHub</span>
+            <i data-lucide="arrow-up-right" aria-hidden="true"></i>
+          </a>
+
+          <a
+            class="card social-card"
+            href="https://www.linkedin.com/in/muhammad-hussnain326?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fa-brands fa-linkedin social-brand-icon" aria-hidden="true"></i>
+            <span>LinkedIn</span>
+            <i data-lucide="arrow-up-right" aria-hidden="true"></i>
+          </a>
+
+          <a class="card social-card" href="mailto:muhammadhussnain322@gmail.com">
+            <i data-lucide="mail" aria-hidden="true"></i>
+            <span>Email</span>
+            <i data-lucide="arrow-up-right" aria-hidden="true"></i>
+          </a>
+
+          <a class="card social-card" href="#projects">
+            <i data-lucide="folder-code" aria-hidden="true"></i>
+            <span>My Work</span>
+            <i data-lucide="arrow-up-right" aria-hidden="true"></i>
+          </a>
+        </div>
+
+        <button
+          class="card robot-card"
+          id="robotAssistant"
+          type="button"
+          aria-label="Open AI portfolio assistant"
+          aria-haspopup="dialog"
         >
-          <i class="fa-brands fa-github social-brand-icon"
-   aria-hidden="true"></i>
-          <span>GitHub</span>
-          <i data-lucide="arrow-up-right"></i>
-        </a>
-        <a
-          class="card social-card"
-          href="https://www.linkedin.com/in/muhammad-hussnain326?utm_source=share_via&utm_content=profile&utm_medium=member_android"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <i class="fa-brands fa-linkedin social-brand-icon"
-   aria-hidden="true"></i>
-          <span>LinkedIn</span>
-          <i data-lucide="arrow-up-right"></i>
-        </a>
-        <a class="card social-card" href="mailto:muhammadhussnain322@gmail.com">
-          <i data-lucide="mail"></i>
-          <span>Email</span>
-          <i data-lucide="arrow-up-right"></i>
-        </a>
-        <a class="card social-card" href="#projects">
-          <i data-lucide="folder-code"></i>
-          <span>My Work</span>
-          <i data-lucide="arrow-up-right"></i>
-        </a>
+          <span class="robot-status">
+            <span class="robot-status-dot"></span>
+            AI ASSISTANT
+          </span>
+
+          <!-- Interactive robot: head and eyes follow the cursor (see script.js) -->
+          <span class="robot-image-wrap" id="robotEyeTracker">
+            <svg
+              class="robot-svg"
+              viewBox="0 0 320 330"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-label="Friendly AI assistant robot that follows your cursor"
+            >
+              <ellipse class="r-shadow" cx="160" cy="318" rx="78" ry="8" />
+
+              <!-- Body -->
+              <g class="r-body">
+                <rect class="r-arm" x="62" y="232" width="26" height="62" rx="13" />
+                <rect class="r-arm" x="232" y="232" width="26" height="62" rx="13" />
+                <rect class="r-torso" x="95" y="212" width="130" height="94" rx="38" />
+                <circle class="r-chest-ring" cx="160" cy="258" r="15" />
+                <circle class="r-chest-light" cx="160" cy="258" r="8" />
+              </g>
+
+              <rect class="r-neck" x="144" y="196" width="32" height="26" rx="8" />
+
+              <!-- Head -->
+              <g class="r-head">
+                <g class="r-antenna">
+                  <line class="r-antenna-stem" x1="160" y1="72" x2="160" y2="44" />
+                  <circle class="r-antenna-tip" cx="160" cy="36" r="8" />
+                </g>
+                <rect class="r-ear" x="50" y="112" width="22" height="52" rx="11" />
+                <rect class="r-ear" x="248" y="112" width="22" height="52" rx="11" />
+                <rect class="r-shell" x="70" y="70" width="180" height="136" rx="46" />
+
+                <g class="r-face">
+                  <rect class="r-screen" x="92" y="92" width="136" height="92" rx="30" />
+
+                  <g class="r-eyes">
+                    <g class="r-eye">
+                      <ellipse class="r-eye-shape" cx="130" cy="136" rx="16" ry="20" />
+                      <circle class="r-eye-shine" cx="135" cy="129" r="5" />
+                    </g>
+                    <g class="r-eye">
+                      <ellipse class="r-eye-shape" cx="190" cy="136" rx="16" ry="20" />
+                      <circle class="r-eye-shine" cx="195" cy="129" r="5" />
+                    </g>
+                  </g>
+                  <path class="r-mouth" d="M146 166 Q160 176 174 166" />
+                </g>
+              </g>
+            </svg>
+          </span>
+
+          <span class="robot-caption">Curious about my work?</span>
+          <span class="robot-hint">Ask my AI assistant <span aria-hidden="true">↗</span></span>
+        </button>
       </section>
 
       <!-- Statement -->
@@ -126,13 +226,13 @@
         <h2>Learning today.<br />Building for tomorrow.</h2>
         <p>Turning machine learning concepts into useful AI applications.</p>
       </section>
-      
+
       <!-- Skills -->
       <section class="card skills-card" id="skills">
         <div class="section-heading">
           <div>
             <p class="eyebrow">MY TOOLKIT</p>
-            <h2>Skills & Technologies</h2>
+            <h2>Skills &amp; Technologies</h2>
           </div>
         </div>
 
@@ -157,7 +257,7 @@
         </div>
 
         <div class="skill-category">
-          <h3>Web & AI Application Development</h3>
+          <h3>Web &amp; AI Application Development</h3>
           <div class="skill-tags">
             <span>HTML</span>
             <span>CSS</span>
@@ -167,7 +267,6 @@
           </div>
         </div>
       </section>
-
 
       <!-- Projects -->
       <section class="card projects-card" id="projects">
@@ -182,12 +281,13 @@
         <div class="project-preview">
           <article class="project-placeholder">
             <div class="project-image">
-  <img
-    src="assets/images/projects/E-Commerce Sales Analytics Notebook.png"
-    alt="Notebook-style preview of the E-Commerce Sales Analytics project"
-    loading="lazy"
-  />
-</div>
+              <img
+                src="assets/images/projects/E-Commerce Sales Analytics Notebook.png"
+                alt="Notebook-style preview of the E-Commerce Sales Analytics project"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
             <div class="project-icon">
               <i data-lucide="chart-no-axes-combined"></i>
             </div>
@@ -195,7 +295,12 @@
             <span>01 / DATA ANALYTICS</span>
             <h3>E-Commerce Sales Analytics</h3>
 
-            <p>Analyzed the Sample Superstore dataset using Python, Pandas, and NumPy to explore sales performance, profitability, customer segments, regional patterns, and monthly trends. Created visualizations with Matplotlib to communicate business insights.</p>
+            <p>
+              Analyzed the Sample Superstore dataset using Python, Pandas, and
+              NumPy to explore sales performance, profitability, customer
+              segments, regional patterns, and monthly trends. Created
+              visualizations with Matplotlib to communicate business insights.
+            </p>
 
             <div class="project-tags">
               <span>Python</span>
@@ -222,12 +327,13 @@
 
           <article class="project-placeholder">
             <div class="project-image">
-  <img
-    src="assets/images/projects/sales_dashboard.png"
-    alt="Sales charts created with Matplotlib"
-    loading="lazy"
-  />
-</div>
+              <img
+                src="assets/images/projects/sales_dashboard.png"
+                alt="Sales charts created with Matplotlib"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
             <div class="project-icon">
               <i data-lucide="chart-no-axes-combined"></i>
             </div>
@@ -235,7 +341,10 @@
             <h3>Matplotlib Sales Dashboard</h3>
 
             <p>
-              Built a sales visualization dashboard using Python and Matplotlib to present sales data through clear, informative charts. Focused on making trends and comparisons easier to understand through effective data visualization.
+              Built a sales visualization dashboard using Python and Matplotlib
+              to present sales data through clear, informative charts. Focused
+              on making trends and comparisons easier to understand through
+              effective data visualization.
             </p>
 
             <div class="project-tags">
@@ -270,10 +379,12 @@
         <p>
           Ask my portfolio assistant about my learning, skills, and projects.
         </p>
-        <button class="chat-button" id="open-chat">
+        <button class="chat-button" id="open-chat" type="button">
           Ask My AI Assistant <i data-lucide="arrow-up-right"></i>
         </button>
       </section>
+
+      <!-- Contact -->
       <section class="card contact-card" id="contact">
         <p class="eyebrow">LET'S CONNECT</p>
         <h2>Have a project or opportunity in mind?</h2>
@@ -298,28 +409,47 @@
         development, with a focus on building practical projects and learning
         deployment.
       </p>
-      <p id="backend-status">Connecting to portfolio API...</p>
+            <div class="education-item">
+        <div class="education-icon"><i data-lucide="graduation-cap"></i></div>
+        <div>
+          <p class="education-title">Computer Science</p>
+          <p class="education-meta">Szabist University, Islamabad · 2023 – 2027</p>
+        </div>
+      </div>
     </section>
 
-    <!-- Contact -->
     <footer>
       <a href="#home" class="logo">H<span>.</span></a>
       <p>Building my future in AI, one project at a time.</p>
-      <p>© <span id="current-year"></span> My Portfolio</p>
+      <p>© <span id="current-year"></span> Muhammad Hussnain</p>
     </footer>
-    <div class="chat-window" id="chat-window" hidden>
+
+    <!-- Chat window -->
+    <div
+      class="chat-window"
+      id="chat-window"
+      role="dialog"
+      aria-label="Portfolio AI assistant"
+      hidden
+    >
       <div class="chat-header">
         <div>
           <h3>Portfolio AI</h3>
           <p>Ask me about my journey</p>
         </div>
-        <button id="close-chat" aria-label="Close chat">×</button>
+        <button id="close-chat" type="button" aria-label="Close chat">×</button>
       </div>
 
-      <div class="chat-messages" id="chat-messages">
+      <div class="chat-messages" id="chat-messages" aria-live="polite">
         <div class="message bot-message">
           Hi! 👋 Ask me about my skills, projects, or AI Engineer journey.
         </div>
+      </div>
+            <div class="chat-suggestions" id="chat-suggestions" aria-label="Suggested questions">
+        <button type="button" data-question="What projects has he built?">Projects</button>
+        <button type="button" data-question="What are his skills?">Skills</button>
+        <button type="button" data-question="Where does he study?">Education</button>
+        <button type="button" data-question="How can I contact him?">Contact</button>
       </div>
 
       <form class="chat-form" id="chat-form">
@@ -328,14 +458,18 @@
           id="chat-input"
           placeholder="Ask a question..."
           aria-label="Your message"
+          maxlength="300"
+          autocomplete="off"
           required
         />
         <button type="submit" aria-label="Send message">➤</button>
       </form>
     </div>
+
     <button
       id="chat-launcher"
       class="chat-launcher"
+      type="button"
       aria-label="Open AI assistant"
     >
       <i data-lucide="message-circle"></i>
