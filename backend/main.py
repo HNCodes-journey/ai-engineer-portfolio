@@ -43,7 +43,6 @@ RATE_LIMIT_WINDOW_SECONDS = int(os.getenv("RATE_LIMIT_WINDOW", "60"))  # ...per 
 DAILY_LIMIT_PER_IP = int(os.getenv("DAILY_LIMIT_PER_IP", "60"))
 GLOBAL_DAILY_LIMIT = int(os.getenv("GLOBAL_DAILY_LIMIT", "500"))
 _global = [0, 0]  # [day_number, count]
-
 if not GEMINI_API_KEY:
     raise RuntimeError("GEMINI_API_KEY is not set. Add it to .env or your host's env vars.")
 
