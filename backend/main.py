@@ -14,6 +14,7 @@ from typing import Literal
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from google import genai
 from google.genai import types
 from pydantic import BaseModel, Field
@@ -185,3 +186,10 @@ async def chat(payload: ChatRequest, request: Request):
     if not reply:
         reply = "I couldn't generate an answer to that. Try rephrasing, or email Hussnain directly."
     return ChatResponse(reply=reply)
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent  # AI_Engineer_Portfolio/
+
+# "/" wale mount se PEHLE
+app.mount("/assets", StaticFiles(directory=BASE_DIR / "assets"), name="assets")
+app.mount("/", StaticFiles(directory=BASE_DIR / "static", html=True), name="static")
