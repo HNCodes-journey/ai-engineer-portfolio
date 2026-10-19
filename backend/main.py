@@ -6,9 +6,11 @@ Endpoints (same contract your script.js already uses):
   POST /api/chat    -> body {"message": str, "history": [{"role","text"}]}
                        returns {"reply": str}
 """
+import asyncio
 import os
 import time
 from collections import defaultdict, deque
+from pathlib import Path
 from typing import Literal
 
 from dotenv import load_dotenv
@@ -24,6 +26,7 @@ load_dotenv()
 # ---------------------------------------------------------------- config
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.8-flash")
+GEMINI_FALLBACK_MODEL = os.getenv("GEMINI_FALLBACK_MODEL", "")
 
 # Comma-separated list, e.g. "https://hussnain.netlify.app,http://127.0.0.1:5500"
 ALLOWED_ORIGINS = [
@@ -43,6 +46,7 @@ RATE_LIMIT_WINDOW_SECONDS = int(os.getenv("RATE_LIMIT_WINDOW", "60"))  # ...per 
 DAILY_LIMIT_PER_IP = int(os.getenv("DAILY_LIMIT_PER_IP", "60"))
 GLOBAL_DAILY_LIMIT = int(os.getenv("GLOBAL_DAILY_LIMIT", "500"))
 _global = [0, 0]  # [day_number, count]
+
 if not GEMINI_API_KEY:
     raise RuntimeError("GEMINI_API_KEY is not set. Add it to .env or your host's env vars.")
 
@@ -133,8 +137,9 @@ def client_ip(request: Request) -> str:
 
 def check_rate_limit(ip: str) -> None:
     now = time.time()
-    
+    today = int(now // 86400)
 
+    # Per-IP, short window
     window = _recent[ip]
     while window and now - window[0] > RATE_LIMIT_WINDOW_SECONDS:
         window.popleft()
@@ -142,19 +147,21 @@ def check_rate_limit(ip: str) -> None:
         raise HTTPException(429, "Too many messages. Please wait a minute and try again.")
     window.append(now)
 
-    today = int(now // 86400)
+    # Per-IP, daily
     entry = _daily[ip]
     if entry[0] != today:
         entry[0], entry[1] = today, 0
     if entry[1] >= DAILY_LIMIT_PER_IP:
         raise HTTPException(429, "Daily message limit reached. Please try again tomorrow.")
     entry[1] += 1
-        # Global backstop (IP spoof hone par bhi quota bachata hai)
+
+    # Global backstop (protects the quota even if IPs are spoofed)
     if _global[0] != today:
         _global[0], _global[1] = today, 0
     if _global[1] >= GLOBAL_DAILY_LIMIT:
         raise HTTPException(429, "The assistant is busy today. Please try again tomorrow.")
     _global[1] += 1
+
     # Keep memory bounded
     if len(_recent) > 5000:
         _recent.clear()
@@ -188,28 +195,39 @@ async def chat(payload: ChatRequest, request: Request):
     ]
     contents.append(types.Content(role="user", parts=[types.Part(text=payload.message)]))
 
-    try:
-        response = await client.aio.models.generate_content(
-            model=GEMINI_MODEL,
-            contents=contents,
-            config=types.GenerateContentConfig(
-                system_instruction=SYSTEM_PROMPT,
-                 max_output_tokens=1000,  
-                temperature=0.5,
-            ),
-        )
-    except Exception as exc:  # log server-side, never leak details to the visitor
-        print(f"Gemini error: {exc!r}")
+    models_to_try = [GEMINI_MODEL] + ([GEMINI_FALLBACK_MODEL] if GEMINI_FALLBACK_MODEL else [])
+    response = None
+    for model_name in models_to_try:
+        for attempt in range(2):
+            try:
+                response = await client.aio.models.generate_content(
+                    model=model_name,
+                    contents=contents,
+                    config=types.GenerateContentConfig(
+                        system_instruction=SYSTEM_PROMPT,
+                        max_output_tokens=1000,
+                        temperature=0.5,
+                    ),
+                )
+                break
+            except Exception as exc:  # log server-side, never leak details to the visitor
+                print(f"Gemini error ({model_name}, attempt {attempt + 1}): {exc!r}")
+                await asyncio.sleep(1.5)
+        if response is not None:
+            break
+
+    if response is None:
         raise HTTPException(502, "The assistant is unavailable right now.")
 
     reply = (response.text or "").strip()
     if not reply:
         reply = "I couldn't generate an answer to that. Try rephrasing, or email Hussnain directly."
     return ChatResponse(reply=reply)
-from pathlib import Path
 
+
+# ---------------------------------------------------------------- static files
+# Keep these LAST: the "/" mount catches every path not matched above.
 BASE_DIR = Path(__file__).resolve().parent.parent  # AI_Engineer_Portfolio/
 
-# "/" wale mount se PEHLE
 app.mount("/assets", StaticFiles(directory=BASE_DIR / "assets"), name="assets")
 app.mount("/", StaticFiles(directory=BASE_DIR / "static", html=True), name="static")
